@@ -1,0 +1,1 @@
+[![Build Status](https://api.travis-ci.org/jackolney/r-build-test.svg)](https://travis-ci.org/jackolney/r-build-test)
