@@ -7,14 +7,15 @@ sudo: required
 script: 
     - R CMD SHLIB -o hello.so hello.cpp
 
-before_install:
-    - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-    - chmod 755 ./travis-tool.sh
-    - ./travis-tool.sh bootstrap
-install:
-    - ./travis-tool.sh install_deps
-
 notifications:
   email:
     on_success: change
     on_failure: always
+
+# script:
+#     - "curl -O http://cran.r-project.org/src/base/R-3/R-3.2.1.tar.gz"
+#     - "tar -xzf R-3.2.1.tar.gz"
+#     - "(cd R-3.2.1; ./configure --prefix=/usr --enable-R-shlib && make && sudo make install)"
+#     - "R CMD SHLIB -o hello.so hello.cpp"
+
+# If fails try, before_install
