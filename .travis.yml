@@ -1,22 +1,20 @@
-language: r
-
-warnings_are_errors: true
+language: c
+# To build on OSX, switch the previous line to
+# language: objective-c
 
 sudo: required
+
+script: 
+    - R CMD SHLIB -o hello.so hello.cpp
+
+before_install:
+    - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+    - chmod 755 ./travis-tool.sh
+    - ./travis-tool.sh bootstrap
+install:
+    - ./travis-tool.sh install_deps
 
 notifications:
   email:
     on_success: change
     on_failure: always
-
-before_script:
-  - R CMD config CXX
-
-after_script:
-  - echo "after script"
-
-after_failure:
-  - echo "after failure"
-
-after_success:
-  - echo "after success"
