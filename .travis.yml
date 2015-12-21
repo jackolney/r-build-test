@@ -4,7 +4,7 @@ language: c
 
 sudo: required
 
-script: 
+before_install: 
     - R CMD SHLIB -o hello.so hello.cpp
 
 notifications:
