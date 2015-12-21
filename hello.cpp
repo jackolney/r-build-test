@@ -1,8 +1,18 @@
 #include <iostream>
+#include <Rdefines.h>
+#include <stdio.h>
+#include <R.h>
 
 using namespace std;
 
+extern "C" {
+    SEXP Hello() {
+        cout << "Hello, world!" << endl;
+        return 0;
+    }
+}
+
 int main() {
-    cout << "Hello, world!" << endl;
+    Hello();
     return 0;
 }

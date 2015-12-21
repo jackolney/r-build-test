@@ -1,22 +1,23 @@
 language: c
-# To build on OSX, switch the previous line to
-# language: objective-c
 
-sudo: required
+before_install:
+    - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+    - chmod 755 ./travis-tool.sh
+    - ./travis-tool.sh bootstrap
+
+install:
+    - R --version
+    - CXX=g++
+    - CXXFLAGS="-mtune=native -03 -Wall -pedantic -Wconversion"
+    - R CMD config CXX
+    - R CMD SHLIB -o hello.so hello.cpp
+
+# If "R --version" fails to compile. 
 
 script: 
-    - "curl -O http://cran.r-project.org/src/base/R-3/R-3.2.1.tar.gz"
-    - "tar -xzf R-3.2.1.tar.gz"
-    - "(cd R-3.2.1; ./configure --prefix=/usr --enable-R-shlib && make && sudo make install)"
-    - "R CMD SHLIB -o hello.so hello.cpp"
+    - echo done.
 
 notifications:
-  email:
-    on_success: change
-    on_failure: always
-
-# script:
-#     - "curl -O http://cran.r-project.org/src/base/R-3/R-3.2.1.tar.gz"
-#     - "tar -xzf R-3.2.1.tar.gz"
-#     - "(cd R-3.2.1; ./configure --prefix=/usr --enable-R-shlib && make && sudo make install)"
-#     - "R CMD SHLIB -o hello.so hello.cpp"
+    email:
+        on_success: change
+        on_failure: change
