@@ -4,8 +4,11 @@ language: c
 
 sudo: required
 
-before_install: 
-    - R CMD SHLIB -o hello.so hello.cpp
+script: 
+    - "curl -O http://cran.r-project.org/src/base/R-3/R-3.2.1.tar.gz"
+    - "tar -xzf R-3.2.1.tar.gz"
+    - "(cd R-3.2.1; ./configure --prefix=/usr --enable-R-shlib && make && sudo make install)"
+    - "R CMD SHLIB -o hello.so hello.cpp"
 
 notifications:
   email:
@@ -17,5 +20,3 @@ notifications:
 #     - "tar -xzf R-3.2.1.tar.gz"
 #     - "(cd R-3.2.1; ./configure --prefix=/usr --enable-R-shlib && make && sudo make install)"
 #     - "R CMD SHLIB -o hello.so hello.cpp"
-
-# If fails try, before_install
